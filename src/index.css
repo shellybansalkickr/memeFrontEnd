@@ -4,10 +4,35 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+body {
+  min-height: 100vh;
+}
+
+.App{
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  min-height: 100vh;
+  
+}
+
+#gradient-bg {
+  background-image: linear-gradient(to left, #3264f5, #4a54e8, #5b42db, #682ccb, #0B85FF) !important;
+  background: linear-gradient(90deg,#3264f5,#0B85FF);
+}
+
+
+
+.FlexWrapper {
+  flex: 1;
+}
+
