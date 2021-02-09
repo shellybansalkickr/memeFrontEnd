@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import axios from 'axios';
+import Loader from 'react-loader-spinner';
 
 
 
 export class RechargeForm1 extends React.Component {
 
   constructor(props) {
+    debugger;
     super(props);
     this.state = {
 
@@ -17,35 +19,33 @@ export class RechargeForm1 extends React.Component {
       firstName: "",
       amount: "",
       phone: "",
-      emailId: ""
+      emailId: "",
+      isLoading: false
     }
   }
 
   redirectToPayU = (pd) => {
     //use window.bolt.launch if you face an error in bolt.launch
+    this.setState({ isLoading: false });
     window.bolt.launch(pd, {
       responseHandler: function (response) {
         // your payment response Code goes here
-        fetch('/payment/payumoney/response', {
+        fetch('/api/setStatus', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(response.response)
+          body: JSON.stringify(response)
         })
-          .then(function (a) {
-            return a.json();
+          .then(function (response1) {
           })
-          .then(function (json) {
-            console.log(json);
-          });
       },
       catchException: function (response) {
-        // the code you use to handle the integration errors goes here
-        // Make any UI changes to convey the error to the user
+
       }
     });
+    this.props.onClose();
   }
 
   setValidated = (val) => {
@@ -60,41 +60,46 @@ export class RechargeForm1 extends React.Component {
       event.preventDefault();
       event.stopPropagation();
     }
-    var bodyFormData = new FormData();
-    var payUParam;
-    bodyFormData.append('memeId', this.state.memeId);
-    bodyFormData.append('lastName', this.state.lastName);
-    bodyFormData.append('firstName', this.state.firstName);
-    bodyFormData.append('amount', this.props.val.amount);
-    bodyFormData.append('number', this.state.phone);
-    bodyFormData.append('emailId', this.state.emailId);
-    bodyFormData.append('coins', this.props.val.coins);
+    else {
+      this.setState({ isLoading: true });
+      var bodyFormData = new FormData();
+      var payUParam;
+      bodyFormData.append('memeId', this.state.memeId);
+      bodyFormData.append('lastName', this.state.lastName);
+      bodyFormData.append('firstName', this.state.firstName);
+      bodyFormData.append('amount', this.props.val.amount);
+      bodyFormData.append('number', this.state.phone);
+      bodyFormData.append('emailId', this.state.emailId);
+      bodyFormData.append('coins', this.props.val.coins);
 
-    axios({
-      method: 'post',
-      url: '/api/rechargeApi',
-      data: bodyFormData
-    })
-      .then(response => {
-        console.log(response);
-        payUParam = {
-          key: response.data.key,
-          txnid: response.data.txnid,
-          amount: response.data.amount,
-          firstname: response.data.firstname,
-          email: response.data.email,
-          phone: response.data.phone,
-          productinfo: response.data.productinfo,
-          surl: response.data.surl,
-          furl: response.data.furl,
-          hash: response.data.hash
-        }
-        this.redirectToPayU(payUParam);
+      axios({
+        method: 'post',
+        url: '/api/rechargeApi',
+        data: bodyFormData
       })
-      .then((error) => {
-        console.log(error);
-      });
-
+        .then(response => {
+          debugger;
+          if (response.status == '200') {
+            console.log(response);
+            payUParam = {
+              key: response.data.key,
+              txnid: response.data.txnid,
+              amount: response.data.amount,
+              firstname: response.data.firstname,
+              email: response.data.email,
+              phone: response.data.phone,
+              productinfo: response.data.productinfo,
+              surl: response.data.surl,
+              furl: response.data.furl,
+              hash: response.data.hash
+            }
+            this.redirectToPayU(payUParam);
+          }
+        })
+        .then((error) => {
+          console.log(error);
+        });
+    }
     this.setValidated(true);
   }
 
@@ -120,7 +125,6 @@ export class RechargeForm1 extends React.Component {
 
 
   render() {
-    console.log(this.props);
     return (
       <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
         <Form.Row>
@@ -158,14 +162,17 @@ export class RechargeForm1 extends React.Component {
         <Form.Row>
           <Form.Group as={Col} md="6" controlId="phone">
             <Form.Label>Mobile</Form.Label>
-            <Form.Control type="text" placeholder="xxxxxxxx" required minLength='8' value={this.state.phone} onChange={this.handlePhoneChange} />
+            <Form.Control type="phone" placeholder="xxxxxxxx" required minLength='8' value={this.state.phone} onChange={this.handlePhoneChange} />
             <Form.Control.Feedback type="invalid">
               Please provide a mobile number.
              </Form.Control.Feedback>
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
-        <Button type="submit">Pay $ {this.props.val.amount} </Button>
+        {this.state.isLoading === true ? <Loader type="ThreeDots" color="blue" height="80px" width="60px" /> :
+          <Button type="submit" >Pay $ {this.props.val.amount}
+          </Button>}
+
       </Form>
     );
   }

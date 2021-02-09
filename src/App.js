@@ -7,6 +7,7 @@ import { Navigator } from './components/NavBar';
 import{Footer} from './components/footer1';
 
 
+
 function App(){
     return(
             <div id='gradient-bg' className="App"> 
