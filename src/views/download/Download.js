@@ -12,11 +12,11 @@ class Download extends Component {
         //   backgroundPosition: 'center',
         //   backgroundSize:'cover'
         // }} >
-        <div className='FlexWrapper' style={{padding:'20px'}}>
+        <div className='FlexWrapper' style={{padding:'20px',backgroundColor:'white'}}>
         
           <p style={{color:'white',textAlign:'center',alignItems:'center'}}>
             <a href='https://play.google.com/store/apps/details?id=com.videochat.memechat' target="_blank">
-              <img src={process.env.PUBLIC_URL + '/img/google.png'} style={{height:'52%',width:'24%'}}></img>
+              <img src={process.env.PUBLIC_URL + '/img/Appstore.png'} style={{height:'52%',width:'24%'}}></img>
             </a>
             <br/> <br/>
             {/* <a href='https://play.google.com/store/apps/details?id=com.videochat.memechat' target="_blank">

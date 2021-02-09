@@ -2,7 +2,7 @@ import './Footer.css';
 
 export const Footer=()=>{
     return(
-<div class="container">
+<div >
   <div class="row">
     	<div class="col-md-12">
     	    <footer class="footer">				
@@ -22,18 +22,20 @@ export const Footer=()=>{
 						Quick Links
 					</div>	
 					<div class="footer-links">
-						<a href="#">
+						<a href="/contact">
 							Contact Us
 						</a>
-						<a href="#">
-							Community Rules
-						</a>
-						<a href="#">
+						<a href="/tc">
 							Terms & conditions
 						</a>
-						<a href="#">
-							Privacy policy
+						<a href="/recharge">
+							Recharge
 						</a>
+						<a href="/details">
+							Transaction Details
+						</a>
+						
+
 					</div>
 				</div>
 				{/* <div class="col-md-3 m-b-30">
