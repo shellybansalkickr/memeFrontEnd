@@ -1,44 +1,44 @@
 import './Footer.css';
 
-export const Footer=()=>{
-    return(
-<div >
-  <div class="row">
-    	<div class="col-md-12">
-    	    <footer class="footer">				
-		<div class="container">
+export const Footer = () => {
+	return (
+		<div >
 			<div class="row">
-				<div class="col-md-6 m-b-30">
-					<div class="footer-title m-t-5 m-b-20 p-b-8">
-						Welcome to MeMe chat!
-					</div>	
-					<p class="white-text">
-					MEMECHAT is a fun way to video chat for interactive shows. Pick your favorite star and start video chat anywhere at any time. Please note, if you meet any inappropriate behavior, just report it with no mercy! Contact to us memechats.service@gmail.com
-					</p>
-				</div>
-				<div class="col-md-2 m-b-30"/>
-				<div class="col-md-4 m-b-30">
-					<div class="footer-title m-t-5 m-b-20 p-b-8">
-						Quick Links
-					</div>	
-					<div class="footer-links">
-						<a href="/contact">
-							Contact Us
-						</a>
-						<a href="/tc">
-							Terms & conditions
-						</a>
-						<a href="/recharge">
-							Recharge
-						</a>
-						<a href="/details">
-							Transaction Details
-						</a>
-						
-
+				<div class="col-md-12">
+					<footer class="footer">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-6 m-b-30">
+									<div class="footer-title m-t-5 m-b-20 p-b-8">
+										Welcome to MeMe chat!
 					</div>
-				</div>
-				{/* <div class="col-md-3 m-b-30">
+									<p class="white-text">
+										MEMECHAT is a fun way to video chat for interactive shows. Pick your favorite star and start video chat anywhere at any time. Please note, if you meet any inappropriate behavior, just report it with no mercy! Contact to us memechats.service@gmail.com
+					</p>
+								</div>
+								<div class="col-md-2 m-b-30" />
+								<div class="col-md-4 m-b-30">
+									<div class="footer-title m-t-5 m-b-20 p-b-8">
+										Quick Links
+					</div>
+									<div class="footer-links">
+										<a href="/contact">
+											Contact Us
+						</a>
+										<a href="/tc">
+											Terms & conditions
+						</a>
+										<a href="/recharge">
+											Recharge
+						</a>
+										<a href="/details">
+											Transaction Details
+						</a>
+
+
+									</div>
+								</div>
+								{/* <div class="col-md-3 m-b-30">
 					<div class="footer-title m-t-5 m-b-20 p-b-8">
 						Support
 					</div>	
@@ -74,13 +74,14 @@ export const Footer=()=>{
 						</li>
 					</div>
 				</div> */}
+							</div>
+						</div>
+					</footer>
+					<div class="footer-bottom">
+						2021 © MEMECHAT Inc.
+	</div>
+				</div>
 			</div>
 		</div>
-	</footer>
-	<div class="footer-bottom">
-	2021 © MEMECHAT Inc.
-	</div>
-    	</div>
-	</div>
-</div>
-    )}
+	)
+}

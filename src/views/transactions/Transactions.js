@@ -31,7 +31,6 @@ class Transactions extends React.Component {
 
     handleSubmit = (event) => {
         const form = event.currentTarget;
-        debugger;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();

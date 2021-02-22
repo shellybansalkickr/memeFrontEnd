@@ -9,6 +9,7 @@ import moment from 'moment';
 //Table header
 const Header = ["Name", "Age", "Size", "Phone", "Gender"];
 
+
 export class TransactionTable extends React.Component {
     constructor(props) {
         super(props);
@@ -26,13 +27,13 @@ export class TransactionTable extends React.Component {
                 date : this.state.date
             }
         })
-            .then((response) => {
-                debugger;
+            .then(response => {
                 this.setState({ trnData: response.data });
             }, (error) => {
 
             });
     }
+    
     render() {
         const Header = ['TxnId', 'TimeStamp', 'MeMe Id', 'Mobile', 'Coins', 'Amount', 'Status']
         return (

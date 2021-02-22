@@ -1,0 +1,132 @@
+import React from "react";
+export const countries =[
+    {
+        id:6169,
+        country:'Myanmar',
+        currency:'MMK'
+    },{
+        id:6170,
+        country:'Russia',
+        currency:'RUB'
+    },
+    {
+        id:6171,
+        country:'Taiwan',
+        currency:'TWD'
+    },
+    {
+        id:6172,
+        country:'Philippines',
+        currency:'PHP'
+    },
+    {
+        id:6173,
+        country:'Cambodia',
+        currency:'KHR'
+    },
+    {
+        id:6174,
+        country:'Malayasia',
+        currency:'MYR'
+    },
+    {
+        id:6175,
+        country:'Timor Leste',
+        currency:'USD'
+    },
+    {
+        id:6176,
+        country:'Singapore',
+        currency:'SGD'
+    },
+    {
+        id:6177,
+        country:'Indonesia',
+        currency:'IDR'
+    },
+    {
+        id:6178,
+        country:'Laos',
+        currency:'LAK'
+    },
+    {
+        id:6179,
+        country:'Thailand',
+        currency:'THB'
+    },
+    {
+        id:6180,
+        country:'Sri Lanka',
+        currency:'LKR'
+    },
+    {
+        id:6181,
+        country:'Pakistan',
+        currency:'PKR'
+    },
+    {
+        id:6182,
+        country:'United Arab Emirates',
+        currency:'AED'
+    },
+    {
+        id:6183,
+        country:'Bahrain',
+        currency:'BHD'
+    },
+    {
+        id:6184,
+        country:'Turkey',
+        currency:'TRY'
+    },
+    {
+        id:6185,
+        country:'India',
+        currency:'INR'
+    },
+    {
+        id:6186,
+        country:'Egypt',
+        currency:'EGP'
+    },
+    {
+        id:6187,
+        country:'Nigeria',
+        currency:'NGN'
+    },
+    {
+        id:6188,
+        country:'Kuwait',
+        currency:'KWD'
+    },
+    {
+        id:6189,
+        country:'South Africa',
+        currency:'ZAR'
+    },
+    {
+        id:6190,
+        country:'Saudi Arabia',
+        currency:'SAR'
+    },
+    {
+        id:6191,
+        country:'Mexico',
+        currency:'MXN'
+    },
+    {
+        id:6192,
+        country:'Brazil',
+        currency:'BRL'
+    },
+    {
+        id:6193,
+        country:'Argentina',
+        currency:'ARS'
+    }
+
+
+    
+
+
+] 
