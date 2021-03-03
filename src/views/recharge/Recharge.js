@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown, DropdownButton,MenuItem } from 'react-bootstrap';
 import axios from 'axios';
+
 
 
 
@@ -21,7 +22,7 @@ class Recharge extends Component {
     this.state = {
       selectedCountry: {
         id: 6175,
-        country: 'Timor Leste',
+        country: 'TimorLeste',
         currency: 'USD',
 
       },
@@ -106,7 +107,9 @@ class Recharge extends Component {
         <img src={RechargeLogo} width='100%' height='100px' />
         <b>Region</b>
 
-        <DropdownButton id="dropdown-basic-button" title={this.state.selectedCountry.country}>
+        <DropdownButton id="dropdown-basic-button" bsStyle="default"
+          bsSize="small"
+          style={{ maxHeight: "18px" }} title={this.state.selectedCountry.country}>
 
           {countryMap.countries.map(selectedCountry => (
             <Dropdown.Item as="button"><div onClick={() => this.changeSelectedCountry({ selectedCountry })}>{selectedCountry.country}</div></Dropdown.Item>
@@ -114,24 +117,24 @@ class Recharge extends Component {
           ))}
         </DropdownButton>
       </div>
-      {this.state.isLoaded===false?"":<div className=' recharge-centre flex-container' style={{
+      {this.state.isLoaded === false ? "" : <div className=' recharge-centre flex-container' style={{
         flexFlow: 'row wrap',
         padding: '20px',
         justifyContent: 'space-between', alignItems: 'center'
       }}>
 
-        <AddAmountCard val={{ currency: this.state.selectedCountry.currency }} />
+        <AddAmountCard val={{ selectedCountry: this.state.selectedCountry }} />
         {this.state.offers.map((offer, i) => {
           console.log(this.state.offers);
           return (
-            <RechargeCard val={{ coins: offer.coinValue, amount: (offer.dollarValue * this.state.rate).toFixed(2), calledFrom: 'plans', currency: this.state.selectedCountry.currency }}></RechargeCard>
+            <RechargeCard val={{ coins: offer.coinValue, amount: (offer.dollarValue * this.state.rate).toFixed(0), calledFrom: 'plans', selectedCountry: this.state.selectedCountry }}></RechargeCard>
           )
 
         })}
 
 
       </div>}
-      
+
     </>
 
     )

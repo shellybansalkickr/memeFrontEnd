@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { TablePagination } from 'react-pagination-table';
-import { Button, Form,Col} from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -18,13 +18,13 @@ export class TransactionTable extends React.Component {
             trnData: []
         }
     }
-    setDate =(e)=>{
-        this.setState({date:e.target.value});
+    setDate = (e) => {
+        this.setState({ date: e.target.value });
     }
     fetchData = () => {
-        axios.get("/api/fetchTransactionByDate",{
-            params : {
-                date : this.state.date
+        axios.get("/api/fetchTransactionByDate", {
+            params: {
+                date: this.state.date
             }
         })
             .then(response => {
@@ -33,11 +33,11 @@ export class TransactionTable extends React.Component {
 
             });
     }
-    
+
     render() {
         const Header = ['TxnId', 'TimeStamp', 'MeMe Id', 'Mobile', 'Coins', 'Amount', 'Status']
         return (
-            <div style={{backgroundColor:'white',padding:'20px'}}>
+            <div style={{ backgroundColor: 'white', padding: '20px' }}>
                 <Form.Row>
                     <Form.Group as={Col} md="6" controlId="selecteDate" >
                         <Form.Control type="date" placeholder="Transaction Date" max={moment().format("YYYY-MM-DD")} value={this.state.date} onChange={this.setDate} required />

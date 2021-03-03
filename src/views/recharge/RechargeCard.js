@@ -31,9 +31,9 @@ export class RechargeCard extends React.Component {
           <Card.Body>
             <Card.Title>{this.props.val.coins} Coins</Card.Title>
             <Card.Text>
-              <b>{this.props.val.amount} {this.props.val.currency}</b>
+              <b>{this.props.val.amount} {this.props.val.selectedCountry.currency}</b>
             </Card.Text>
-            <Button variant="primary" onClick={this.handleShow} ><b> Pay {this.props.val.amount} {this.props.val.currency}</b></Button>
+            <Button variant="primary" onClick={this.handleShow} ><b> Pay {this.props.val.amount} {this.props.val.selectedCountry.currency}</b></Button>
           </Card.Body>
         </Card>
 

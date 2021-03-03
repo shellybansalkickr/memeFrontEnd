@@ -31,7 +31,7 @@ export const countries =[
     },
     {
         id:6175,
-        country:'Timor Leste',
+        country:'TimorLeste',
         currency:'USD'
     },
     {
@@ -56,7 +56,7 @@ export const countries =[
     },
     {
         id:6180,
-        country:'Sri Lanka',
+        country:'SriLanka',
         currency:'LKR'
     },
     {
@@ -66,18 +66,13 @@ export const countries =[
     },
     {
         id:6182,
-        country:'United Arab Emirates',
+        country:'UAE',
         currency:'AED'
     },
     {
         id:6183,
         country:'Bahrain',
         currency:'BHD'
-    },
-    {
-        id:6184,
-        country:'Turkey',
-        currency:'TRY'
     },
     {
         id:6185,
@@ -101,12 +96,12 @@ export const countries =[
     },
     {
         id:6189,
-        country:'South Africa',
+        country:'SouthAfrica',
         currency:'ZAR'
     },
     {
         id:6190,
-        country:'Saudi Arabia',
+        country:'SaudiArabia',
         currency:'SAR'
     },
     {

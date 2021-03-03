@@ -44,7 +44,7 @@ export class AddAmountCard extends React.Component {
                         <Card.Text>
                             <Form.Control type="text" placeholder="Enter Amount" value={this.state.val.amount} onChange={this.handleAmountChange} required />
                         </Card.Text>
-                        <Button variant="primary" onClick={this.handleShow} disabled={!this.state.val.amount} ><b> Add {this.state.val.amount} {this.props.val.currency}</b></Button>
+                        <Button variant="primary" onClick={this.handleShow} disabled={!this.state.val.amount} ><b> Add {this.state.val.amount} {this.props.val.selectedCountry.currency}</b></Button>
                     </Card.Body>
                 </Card>
 

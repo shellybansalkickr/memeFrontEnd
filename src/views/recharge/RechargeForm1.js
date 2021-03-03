@@ -4,7 +4,6 @@ import axios from 'axios';
 import Loader from 'react-loader-spinner';
 import coda from '../img/coda.png';
 import payUMoney from '../img/payUMoney.jpg';
-import { CodaIframe } from './CodaIframe';
 
 
 
@@ -24,12 +23,23 @@ export class RechargeForm1 extends React.Component {
       phone: "",
       emailId: "",
       isLoading: false,
-      paymentMode: "coda",
-      iframe: ""
+      paymentMode: "CODA",
     }
   }
 
-  redirectToPayU = (pd) => {
+  redirectToPayU = (response) => {
+    var pd = {
+      key: response.data.key,
+      txnid: response.data.txnid,
+      amount: response.data.amount,
+      firstname: response.data.firstname,
+      email: response.data.email,
+      phone: response.data.phone,
+      productinfo: response.data.productinfo,
+      surl: response.data.surl,
+      furl: response.data.furl,
+      hash: response.data.hash
+    }
     //use window.bolt.launch if you face an error in bolt.launch
     this.setState({ isLoading: false });
     window.bolt.launch(pd, {
@@ -79,57 +89,62 @@ export class RechargeForm1 extends React.Component {
     }
     else {
       this.setState({ isLoading: true });
-      debugger;
-      if (this.state.paymentMode === 'coda') {
-        this.setState({
-          iframe: '<iframe src=https://sandbox.codapayments.com/airtime/begin?browser_type=mobile-web width="540" height="450"></iframe>'
+      var bodyFormData = new FormData();
+      var payUParam;
+      bodyFormData.append('memeId', this.state.memeId);
+      bodyFormData.append('lastName', this.state.lastName);
+      bodyFormData.append('firstName', this.state.firstName);
+      bodyFormData.append('amount', this.props.val.amount);
+      bodyFormData.append('number', this.state.phone);
+      bodyFormData.append('emailId', this.state.emailId);
+      bodyFormData.append('coins', this.props.val.coins);
+      bodyFormData.append('countryName', this.props.val.selectedCountry.country);
+      bodyFormData.append('paymentVia', this.state.paymentMode)
+
+      axios({
+        method: 'post',
+        url: '/api/rechargeApi',
+        data: bodyFormData
+      })
+        .then(response => {
+          this.setState({ isLoading: false });
+          if (response.status !== 200) {
+
+            return null;
+
+          }
+          if (this.state.paymentMode === 'PAYU') {
+            console.log(response);
+            this.redirectToPayU(response);
+            return null;
+          }
+          this.redirectToCoda(response);
         })
-
-      }
-      else {
-        var bodyFormData = new FormData();
-        var payUParam;
-        bodyFormData.append('memeId', this.state.memeId);
-        bodyFormData.append('lastName', this.state.lastName);
-        bodyFormData.append('firstName', this.state.firstName);
-        bodyFormData.append('amount', this.props.val.amount);
-        bodyFormData.append('number', this.state.phone);
-        bodyFormData.append('emailId', this.state.emailId);
-        bodyFormData.append('coins', this.props.val.coins);
-
-        axios({
-          method: 'post',
-          url: '/api/rechargeApi',
-          data: bodyFormData
-        })
-          .then(response => {
-            if (response.status == '200') {
-              console.log(response);
-              payUParam = {
-                key: response.data.key,
-                txnid: response.data.txnid,
-                amount: response.data.amount,
-                firstname: response.data.firstname,
-                email: response.data.email,
-                phone: response.data.phone,
-                productinfo: response.data.productinfo,
-                surl: response.data.surl,
-                furl: response.data.furl,
-                hash: response.data.hash
-              }
-              this.redirectToPayU(payUParam);
-            }
-          })
-          .then((error) => {
-            console.log(error);
-          });
-      }
-
+        .then((error) => {
+          console.log(error);
+          this.setState({ isLoading: false });
+        });
     }
-
-
     this.setValidated(true);
   }
+  redirectToCoda = (response) => {
+    window.airtime_checkout(response.data.txnId);
+    this.props.onClose();
+    setTimeout(() => {
+      axios({
+        method:'post',
+        url:'/api/getStatusFromCoda',
+        params:{txnId:response.data.txnId}
+      }).then((response)=>{
+        console.log(response);
+      }).then((error)=>{
+        console.log(error);
+      });
+      
+    }, 60000);
+    
+  }
+
 
 
   handleEmailChange = (e) => {
@@ -150,6 +165,7 @@ export class RechargeForm1 extends React.Component {
   }
 
   handlePayModeChange = (e) => {
+    debugger;
     this.setState({
       paymentMode: e.target.value
     });
@@ -203,13 +219,13 @@ export class RechargeForm1 extends React.Component {
         <Form.Row>
           <InputGroup as={Col} md="5" controlId="paymentMode">
             <InputGroup.Prepend>
-              <InputGroup.Radio id="payment" name="payment" value="coda" onSelect={this.handlePayModeChange} checked />
+              <InputGroup.Radio id="payment" name="payment" value="CODA" onChange={this.handlePayModeChange} checked />
             </InputGroup.Prepend>
             <img style={{ height: '80px', width: '150px' }} src={coda} />
           </InputGroup>
           <InputGroup as={Col} md="6" controlId="paymentMode">
             <InputGroup.Prepend>
-              <InputGroup.Radio id="payment" name="payment" value="payU" onSelect={this.handlePayModeChange} />
+              <InputGroup.Radio id="payment" name="payment" value="PAYU" onChange={this.handlePayModeChange} />
             </InputGroup.Prepend>
             <img style={{ height: '80px', width: '140px' }} src={payUMoney} />
           </InputGroup>
@@ -218,16 +234,11 @@ export class RechargeForm1 extends React.Component {
         <Form.Row>
           <div class={Col}>
             {this.state.isLoading === true ? <Loader type="ThreeDots" color="blue" height="80px" width="60px" /> :
-              <Button type="submit" >Pay  {this.props.val.amount} {this.props.val.currency}
+              <Button type="submit" >Pay  {this.props.val.amount} {this.props.val.selectedCountry.currency}
               </Button>}
           </div>
 
         </Form.Row>
-        <Form.Row>
-          <CodaIframe iframe={this.state.iframe} />,
-        </Form.Row>
-
-
 
       </Form>
     );

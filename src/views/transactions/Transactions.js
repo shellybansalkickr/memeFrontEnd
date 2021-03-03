@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Col, Button } from 'react-bootstrap';
+import { Form, Col, Button ,Alert} from 'react-bootstrap';
 import axios from 'axios';
 
 import Loader from 'react-loader-spinner';
@@ -44,6 +44,7 @@ class Transactions extends React.Component {
     }
 
     validateUser = () => {
+        debugger;
         this.setState({ isLoading: true });
         axios.get('/api/verifyuser/manager', {
             params: {
@@ -52,10 +53,15 @@ class Transactions extends React.Component {
             }
         }
         ).then((response) => {
+            debugger;
             if (response.status == '200') {
                 this.setState({ isLoading: false });
                 this.setState({ currentUser: response.data });
             }
+        }).catch((error) => {
+            this.setState({ isLoading: false });
+            console.log(error);
+
         })
 
     };

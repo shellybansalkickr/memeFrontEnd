@@ -4,3 +4,8 @@
     align-items: center;
     
 }
+
+.dropdown-menu {
+    height: 320px;
+    overflow-y: scroll;
+  }
